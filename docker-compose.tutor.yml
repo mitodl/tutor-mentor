@@ -11,6 +11,11 @@ services:
       - default
       - tutor_local_default
     extra_hosts: *tutor-hosts
+  nginx:
+    networks:
+      - default
+      - tutor_local_default
+    extra_hosts: *tutor-hosts
 
 networks:
   default:
