@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ROOT_DIR=$(dirname "$SCRIPT_DIR")
+
+function update_tutor_hosts() {
+    TUTOR_IP=$(tutor-ip)
+
+    printf "%s\n" "x-tutor-hosts: &tutor-hosts" "  - \"local.overhang.io=$TUTOR_IP\"" > $ROOT_DIR/docker-compose.tutor-hosts.yml
+}
+
+update_tutor_hosts
+
+docker events --filter 'event=start' --filter 'type=container' --filter 'image=caddy' | while read event
+do
+    update_tutor_hosts
+done

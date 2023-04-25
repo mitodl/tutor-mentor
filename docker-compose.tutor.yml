@@ -1,0 +1,18 @@
+x-tutor-hosts: &tutor-hosts []
+
+services:
+  web:
+    networks:
+      - default
+      - tutor_local_default
+    extra_hosts: *tutor-hosts
+  celery:
+    networks:
+      - default
+      - tutor_local_default
+    extra_hosts: *tutor-hosts
+
+networks:
+  default:
+  tutor_local_default:
+    external: true

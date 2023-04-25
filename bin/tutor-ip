@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+CADDY_HOSTNAME=$(tutor local dc ps caddy --format=json | tail -n1 | jq -r '.[].Name')
+CADDY_IP=$(docker inspect $CADDY_HOSTNAME | jq -r '.[].NetworkSettings.Networks.tutor_local_default.IPAddress')
+echo $CADDY_IP

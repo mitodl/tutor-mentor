@@ -1,0 +1,9 @@
+[Unit]
+Description=Watcher for updating tutor IP for MIT Open Learning Projects
+
+[Service]
+ExecStart=%h/bin/tutor-ip-watch
+Type=simple
+
+[Install]
+WantedBy=default.target
